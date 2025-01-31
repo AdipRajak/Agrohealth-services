@@ -16,6 +16,14 @@ export const deleteUser = (req, res) => {
     res.status(200).json({ message: "User deleted successfully.", result });
   });
 };
+export const singleUser = (req, res) => {
+  const id = req.params.id;
+  const q = "select * from `users` where `id` = ?";
+  db.query(q, [id], (err, result) => {
+    if (err) return res.status(500).json(err);
+    res.status(200).json({ message: "User fetch successfully.", result });
+  });
+};
 
 export const updateUser = (req, res) => {
   const id = req.params.id;
@@ -32,4 +40,11 @@ export const updateUser = (req, res) => {
       res.status(200).json({ message: "User updated successfully.", result });
     }
   );
+};
+export const getDoctors = (req, res) => {
+  const q = "select * from `users` where `role_id` = 2";
+  db.query(q, (err, result) => {
+    if (err) return res.status(500).json(err);
+    res.status(200).json(result);
+  });
 };
