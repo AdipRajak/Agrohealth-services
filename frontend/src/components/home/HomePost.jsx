@@ -16,7 +16,7 @@ const HomePost = () => {
                         Post Name
                     </span>
                     <span className="text-[16px] leading-[24px] tracking-[-0.1px] text-[#5F6D7E]">
-                        {/* Desc: is hostel is best fTho the hostel and the rating is good */}
+                        Desc: This hostel is best fo the hostel and the rating is good
                         too
                     </span>
                     <div className="flex justify-end">
@@ -38,8 +38,8 @@ const HomePost = () => {
                         Post Name
                     </span>
                     <span className="text-[16px] leading-[24px] tracking-[-0.1px] text-[#5F6D7E]">
-                        {/* Desc: This hostel is best fo the hostel and the rating is good
-                        too */}
+                        Desc: This hostel is best fo the hostel and the rating is good
+                        too
                     </span>
                     <div className="flex justify-end">
 
@@ -60,8 +60,8 @@ const HomePost = () => {
                         Post Name
                     </span>
                     <span className="text-[16px] leading-[24px] tracking-[-0.1px] text-[#5F6D7E]">
-                        {/* Desc: This hostel is best fo the hostel and the rating is good
-                        too */}
+                        Desc: This hostel is best fo the hostel and the rating is good
+                        too
                     </span>
                     <div className="flex justify-end">
 

@@ -1,37 +1,28 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { get } from "../../../utils/api";
 
-const User = () => {
+const Post = () => {
     const navigate = useNavigate();
     const [data, setData] = useState([]);
     console.log(data);
 
     const fetchData = async () => {
-        const res = await get('/api/get-user', {});
+        const res = await get("/api/get-posts", {});
         setData(res);
     };
 
     useEffect(() => {
         fetchData();
     }, []);
-
-    const handleUpdate = (id) => {
-        navigate(`/admin/updateuser/${id}`, {
-            state: { user_id: id }, // Passing the row details as state
-        });
-    };
-
     return (
         <div className="flex-1 shadow-lg shadow-gray-300 rounded-md px-3 py-3">
             <div className="flex justify-between">
-                <h1 className="font-medium text-[30px] text-primary">
-                    All User
+                <h1 className="font-medium text-[30px] text-primary ">
+                    All Post
                 </h1>
                 <button className="bg-[#437EF7] py-2 px-6 rounded-md text-white">
-                    <Link to={`/admin/adduser`}>
-                        Add User
-                    </Link>
+                    Add Post
                 </button>
             </div>
             <div className="overflow-x-auto my-6">
@@ -42,17 +33,16 @@ const User = () => {
                                 ID
                             </th>
                             <th className="px-4 py-2 border-b text-left text-sm font-medium text-gray-700">
-                                Name
+                                title
                             </th>
                             <th className="px-4 py-2 border-b text-left text-sm font-medium text-gray-700">
-                                Address
+                                description
                             </th>
                             <th className="px-4 py-2 border-b text-left text-sm font-medium text-gray-700">
-                                Email
+                                image
                             </th>
-                            <th className="px-4 py-2 border-b text-left text-sm font-medium text-gray-700">
-                                Phone
-                            </th>
+                            
+                            
                             <th className="px-4 py-2 border-b text-left text-sm font-medium text-gray-700">
                                 Action
                             </th>
@@ -65,22 +55,18 @@ const User = () => {
                                     {row.id}
                                 </td>
                                 <td className="px-4 py-2 border-b text-sm text-gray-800">
-                                    {row.name}
+                                    {row.title}
                                 </td>
                                 <td className="px-4 py-2 border-b text-sm text-gray-800">
-                                    {row.address}
+                                    {row.description}
                                 </td>
                                 <td className="px-4 py-2 border-b text-sm text-gray-800">
-                                    {row.email}
+                                    {row.image}
                                 </td>
-                                <td className="px-4 py-2 border-b text-sm text-gray-800">
-                                    {row.phone}
-                                </td>
+                               
+                               
                                 <td className="px-4 py-2 border-b text-sm text-gray-800 flex gap-4">
-                                    <button
-                                        className="bg-[#437EF7] text-white px-6 py-2 rounded-md"
-                                        onClick={() => handleUpdate(row.id)} // Pass the row object
-                                    >
+                                    <button className="bg-[#437EF7] text-white px-6 py-2 rounded-md">
                                         Update
                                     </button>
                                     <button className="bg-red-500 text-white px-6 py-2 rounded-md">
@@ -96,4 +82,4 @@ const User = () => {
     );
 };
 
-export default User;
+export default Post;

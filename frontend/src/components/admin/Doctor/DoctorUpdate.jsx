@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-import { post,get } from "../../../utils/api";
+import { post, get } from "../../../utils/api";
 
-const UserUpdate = () => {
+const DoctorUpdate = () => {
     const location = useLocation();
-    const navigate=useNavigate();
+    const navigate = useNavigate();
     const { user_id } = location?.state || {};
     console.log(user_id);
-
 
     const [data, setData] = useState({
         name: "",
@@ -16,11 +15,11 @@ const UserUpdate = () => {
         address: "",
     });
     console.log(data);
-    
+
     const fetchData = async () => {
-            const res = await get(`/api/get-single-user/${user_id}`, {});
-            setData(res.result[0]);
-        };
+        const res = await get(`/api/get-single-user/${user_id}`, {});
+        setData(res.result[0]);
+    };
 
     useEffect(() => {
         fetchData();
@@ -33,14 +32,16 @@ const UserUpdate = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const res = await post(`/api//update-user/${user_id}`, data);
-        console.log(res)
-        navigate('/admin/user')
+        console.log(res);
+        navigate("/admin/user");
     };
-  
+
     return (
         <div className="flex items-center justify-center h-[100vh] bg-[#f3f3f3]">
             <div className="max-w-[343px] md:max-w-[550px] w-full flex flex-col gap-5 bg-white px-4 md:px-8 py-6 md:py-8 rounded-md shadow-sm shadow-slate-300">
-                <h1 className="text-center font-bold text-3xl">Update User</h1>
+                <h1 className="text-center font-bold text-3xl">
+                    Update Doctor
+                </h1>
                 <div className="flex flex-col w-full gap-2">
                     <label className="font-medium text-[14px] leading-[20px] tracking-[-0.28px]">
                         Name
@@ -99,7 +100,7 @@ const UserUpdate = () => {
                     onClick={handleSubmit}
                     className="bg-primary text-white py-3 rounded-sm font-semibold tracking-[0.48px] "
                 >
-                    Update User
+                    Update Doctor
                 </button>
                 <button
                     type="submit"
@@ -112,4 +113,4 @@ const UserUpdate = () => {
     );
 };
 
-export default UserUpdate;
+export default DoctorUpdate;
