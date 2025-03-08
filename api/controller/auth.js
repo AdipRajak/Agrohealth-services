@@ -5,7 +5,7 @@ import { sendMail } from "../middleware/mail.js";
 
 export const register = (req, res) => {
     const { name, address, phone, email, password, role_id } = req.body;
-    const q = "select * from users where email = ?";
+    const q = "select * from `users` where `email` = ?";
     const generateOTP = () => Math.floor(1000 + Math.random() * 9000);
     const otp = generateOTP();
   
@@ -16,7 +16,7 @@ export const register = (req, res) => {
       const salt = bcrypt.genSaltSync(10);
       const hashedPassword = bcrypt.hashSync(password, salt);
       const q =
-        "insert into users (name, address, phone, email, password, role_id) value(?,?,?,?,?,?)";
+        "insert into users (`name`, `address`, `phone`, `email`, `password`, `role_id`) value(?,?,?,?,?,?)";
       db.query(
         q,
         [name, address, phone, email, hashedPassword, role_id],
@@ -58,7 +58,7 @@ export const register = (req, res) => {
 export const registerDoctor = (req, res) => {
   const { name, address, phone, email } = req.body;
 
-  const q = "select * from users where email = ?";
+  const q = "select * from `users` where `email` = ?";
   const generateOTP = () => Math.floor(1000 + Math.random() * 9000);
   const otp = generateOTP();
 
@@ -72,7 +72,7 @@ export const registerDoctor = (req, res) => {
     const salt = bcrypt.genSaltSync(10);
     const hashedPassword = bcrypt.hashSync("doctor@123", salt);
     const q =
-      "insert into users (name, address, phone, email, password, role_id,isVerified) value(?,?,?,?,?,?,?)";
+      "insert into users (`name`, `address`, `phone`, `email`, `password`, `role_id`,`isVerified`) value(?,?,?,?,?,?,?)";
     db.query(
       q,
       [name, address, phone, email, hashedPassword, 2, 1],
@@ -87,7 +87,7 @@ export const registerDoctor = (req, res) => {
 };
 
 export const login = (req, res) => {
-  const q = "select * from users where email = ?";
+  const q = "select * from `users` where `email` = ?";
   db.query(q, [req.body.email], (err, data) => {
     if (err) return res.status(500).json(err);
     if (data.length === 0)
