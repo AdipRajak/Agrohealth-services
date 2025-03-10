@@ -26,31 +26,31 @@ export const register = (req, res) => {
             .status(200)
             .json({ message: "User added successfully.", success: 1 });
         }
-        // const msg = `<div> <h1>Hi, ${email},This is your OTP: <span style="color:blue">${otp}</span> Please verify it on <a href="http://localhost:5173">AppName</a>.</h1>
-        //                         </div>`;
+        const msg = `<div> <h1>Hi, ${email},This is your OTP: <span style="color:blue">${otp}</span> Please verify it on <a href="http://localhost:5173">AppName</a>.</h1>
+                                </div>`;
   
-        // sendMail({
-        //   receiver: email,
-        //   subject: "Mail Verification",
-        //   text: "msg",
-        //   html: msg,
-        // })
-        //   .then((messageId) => {
-        //     console.log("Email sent successfully with Message ID:", messageId);
-        //     const sql = "UPDATE users SET otp=? WHERE email=?";
-        //     db.query(sql, [otp, email], (err, data) => {
-        //       if (err) {
-        //         res.status(500).send(err);
-        //       } else {
-        //         res.status(200).send({
-        //           success: true,
-        //           message: "User added successfully",
-        //         });
-        //       }
-        //     });
-        //   })
+        sendMail({
+          receiver: email,
+          subject: "Mail Verification",
+          text: "msg",
+          html: msg,
+        })
+          .then((messageId) => {
+            console.log("Email sent successfully with Message ID:", messageId);
+            const sql = "UPDATE users SET otp=? WHERE email=?";
+            db.query(sql, [otp, email], (err, data) => {
+              if (err) {
+                res.status(500).send(err);
+              } else {
+                res.status(200).send({
+                  success: true,
+                  message: "User added successfully",
+                });
+              }
+            });
+          })
   
-        // res.status(201).json({ message: "User created successfully.", result });
+        res.status(201).json({ message: "User created successfully.", result });
       );
     });
   };
