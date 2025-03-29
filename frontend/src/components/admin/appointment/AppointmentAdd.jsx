@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../context/authContext";
 import { get, post } from "../../../utils/api";
 import { toast } from "react-toastify";
 
 const AppointmentAdd = () => {
+    const navigate=useNavigate();
     const { currentUser } = useContext(AuthContext);
     const [formData, setFormData] = useState({
         date: "",
@@ -32,9 +33,18 @@ const AppointmentAdd = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (
+            formData.date == "" ||
+            formData.service == "" ||
+            formData.doctor_id == ""
+        ) {
+            toast.error("All fields are required");
+            return;
+        }
         const res = await post("/api/book-appointment", formData);
         if (res.success == 1) {
             toast.success(res.message);
+            navigate('/user/userappointment')
         } else {
             toast.error(res.message);
         }
@@ -100,7 +110,6 @@ const AppointmentAdd = () => {
                     >
                         Add Appointment
                     </button>
-                    
                 </div>
             </div>
         </div>
